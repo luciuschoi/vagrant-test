@@ -1,6 +1,6 @@
 # Nested Comments with Rails 5
 
-`Vagrant`를 이용하여 작업할 경우에는 터미널에서 `vagrant up` 명령을 실행하여 작업이 완료되면 `vagrant ssh` 명령으로 가상 머신으로 접속하면 됩니다.
+`Vagrant`를 이용하여 작업할 경우에는 터미널에서 `vagrant up` 명령을 실행하여 작업이 완료되면 `vagrant ssh` 명령으로 가상 머신으로 접속하면 된다.
 
 ```sh
 $ vagrant up
