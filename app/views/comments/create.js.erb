@@ -1,0 +1,30 @@
+// create.js.erb (CommentsController#create)
+<% if @comment.parent %>
+  $comment_parent = $("#comment_<%= @comment.parent.id %> > ul");
+  if(!$comment_parent.length){
+    $("#comment_<%= @comment.parent.id %>").append("<ul></ul>");
+    $comment_parent = $("#comment_<%= @comment.parent.id %> > ul");
+  }
+  $comment_form = $("#comment_<%= @comment.parent.id %> .comment-form form");
+<% else %>
+  $comment_parent = $("#comments-widget-of-commentable-<%= @commentable.id %> .comments-list");
+  $comment_form = $("#comments-widget-of-commentable-<%= @commentable.id %> .comment-form form");
+<% end %>
+$comments_count = $("#comments-count-of-commentable-<%= @commentable.id %>");
+<% if @comment.errors.empty?  # if no erros on creating a comment... %>
+  $comments_count.html("<%= @commentable.comments.size %>").effect('highlight',{}, 1000);
+  $comment_parent.append("<%=j render @comment %>").find('li').last().effect("highlight", {}, 1000);
+  $comment_form[0].reset();
+  <% if @comment.parent %>
+    $comment_form.remove();
+    // console.log("start");
+    $comment = $("#comment_<%= @comment.parent.id %>")
+    // console.log("end");
+    $restore_link = $comment.find('a.delete-comment-link')[0]
+    $reply_link = $comment.find('a.reply-comment-link')[0]
+    $reply_link.href = $restore_link.href + "/reply"
+  <% end %>
+  $("#comment_new_chars_counter").html("Remaining : 255");
+<% else # if some errors occurs on creating a comment... %>
+  $comment_form.before("<div class='alert alert-warning alert-dismissible fade in' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><%= @comment.errors.full_messages.join('') %></div>").prev().delay(1500).slideUp();
+<% end %>

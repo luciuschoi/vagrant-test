@@ -1,0 +1,67 @@
+*:last-child {
+  margin-bottom: 0;
+}
+
+[class*='outline'] {
+  background-color: white;
+}
+
+.form-actions {
+  border-top: 1px solid #ccc;
+  background-color: #eaeaea;
+  padding: 1em 1em 2em;
+  margin: 1em 0;
+}
+
+header {
+  padding: 2em .5em;
+  text-align: center;
+  border-bottom: 1px solid #b3e3f2;
+  h1 { font-weight: 800; flex-grow: 1; }
+  background-color: #bfecfa;
+  // margin-bottom: 1em;
+}
+
+#trunk {
+  min-height: 35em;
+  main {
+    // flex-grow: 8;
+    // border-left: 1px solid #ccc;
+    background-color: #fafafa;
+    padding: 1em;
+    h1, h2 {
+      font-weight: 800;
+      margin-bottom: .8em;
+      color: #aaa;
+    }
+  }
+  aside {
+    // flex-grow: 4;
+    background-color: #bfecfa;
+    padding: 1em;
+  }
+}
+
+footer {
+  padding: 1em;
+  text-align: center;
+  border-top: 1px solid #b3e3f2;
+  color: #bbb;
+  background-color: #bfecfa;
+  p { text-align: center; flex-grow: 1; }
+}
+
+.checkbox input {
+  margin-right: .5em;
+}
+
+.form-group.has-error {
+  border: 1px solid darkred;
+  padding: 1em;
+  background-color: white;
+  color: darkred;
+  input, textarea, .select {
+    color: darkred;
+    border-color: darkred;
+  }
+}

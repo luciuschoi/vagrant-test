@@ -1,0 +1,42 @@
+// Place all the styles related to the Posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#posts {
+  .no_content {
+    min-height: 35em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @extend .text-danger;
+    p {
+      flex-grow: 1;
+      align-self: center;
+    }
+  }
+}
+.post {
+  margin: 1em 0 2em 0;
+  .post_title {
+    font-size: 1.5em;
+    font-weight: 800;
+    color: #bbb;
+    line-height: 1.1em;
+    margin-bottom: .2em;
+    padding-bottom: .3em;
+    border-bottom: 1px dashed #ccc;
+  }
+  .post_info {
+    @extend .d-block;
+    text-align:right;
+    margin-bottom: .5em;
+  }
+  .post_content {
+
+  }
+}
+
+
+
+#flash_messages .alert {
+  margin-bottom: 1em;
+}

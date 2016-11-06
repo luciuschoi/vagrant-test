@@ -1,0 +1,9 @@
+// update.js.erb (CommentsController#create)
+$comment_form = $("#comment_<%= @comment.id %> .comment-form form");
+$comment = $("#comment_<%= @comment.id %>");
+<% if @comment.errors.empty?  # if no erros on creating a comment... %>
+  $comment.html("<%=j render @comment %>").find('li').last().effect("highlight", {}, 1000);
+  $comment_form[0].remove();
+<% else # if some errors occurs on creating a comment... %>
+  $comment_form.before("<div class='alert alert-warning alert-dismissible fade in' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><%= @comment.errors.full_messages.join('') %></div>").prev().delay(1500).slideUp();
+<% end %>

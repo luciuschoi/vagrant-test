@@ -1,0 +1,10 @@
+// edit.js.erb
+<% if @comment.errors.empty? %>
+  $("#comment_<%= @comment.id %> > .comment-info .edit-comment-link").removeAttr("href");
+  $("#comment_<%= @comment.id %> > .comment-info").after("<%=j render('comments/form', comment: @comment) %>");
+<% else %>
+  $("#comments-widget-of-commentable-<%= @commentable.id %> .comments-header").after("<div class='alert alert-warning alert-dismissible fade in' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><%= @comment.errors.full_messages.join('') %></div>").next().delay(1500).slideUp('fast');
+<% end %>
+
+// On editing a comment, call to counter of comment.
+$("#comment_<%= @comment.id %> form textarea").trigger('keyup');

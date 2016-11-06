@@ -1,0 +1,8 @@
+<%= render @post %>
+
+<div class="form-actions">
+  <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-outline-primary' %>
+  <%= link_to 'Back', posts_path, class: 'btn btn-outline-primary' %>
+</div>
+
+<%= render "comments/widget", commentable: @post %>

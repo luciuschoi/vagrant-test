@@ -1,0 +1,7 @@
+// reply.js.erb
+<% if @comment.errors.empty? %>
+  $("#comment_<%= @comment.id %> > .comment-info .reply-comment-link").removeAttr("href");
+  $("#comment_<%= @comment.id %> > .comment-info").after("<%=j render('comments/form', comment: @reply) %>");
+<% else %>
+  $("#comments-widget-of-commentable-<%= @commentable.id %> .comments-header").after("<div class='alert alert-warning alert-dismissible fade in' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><%= @comment.errors.full_messages.join('') %></div>").next().delay(1500).slideUp('fast');
+<% end %>

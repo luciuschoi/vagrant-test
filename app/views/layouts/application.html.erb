@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RORLA-Blog</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag 'rorlab_logo.png' %>
+  </head>
+
+  <body>
+    <div class="container">
+      <header class='row'>
+        <%= render "shared/header" %>
+      </header>
+      <div id="trunk" class='row'>
+        <main class='col-md-9'>
+          <div id="flash_messages"><%= flash_messages(:close) %></div>
+          <%= yield %>
+        </main>
+        <aside class='col-md-3'>
+          <%= render "shared/sidebar" %>
+        </aside>
+      </div>
+      <footer class='row'>
+        <%= render 'shared/footer' %>
+      </footer>
+    </div>
+  </body>
+</html>

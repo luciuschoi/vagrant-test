@@ -1,0 +1,25 @@
+<div id="post_<%= post.id %>" class='post'>
+  <div class='post_title'><%= post.title %></div>
+  <small class='post_info'>- 
+    <%= post.user.name %> &bull;
+    <%= localize post.created_at, format: :long %> &bull;
+    <% if post.comments.any? %>
+      <%= t(:comment_count, count: post.comments.size) %> &bull;
+    <% end %>
+    <%= link_to "View", post %> &bull;
+    <%= link_to "Edit", edit_post_path(post) %> &bull;
+    <%= link_to "Destroy", post, method: :delete, data: { confirm: "Are you sure?" } %>
+  </small>
+  <div class='post_content'>
+    <% if action_name == 'show' %>
+      <%= simple_format post.content %>
+    <% else %>
+      <% if post.content.size > 300 %>
+        <%= simple_format truncate(post.content, length: 300) %>
+        <div class='text-xs-right'><small><%= link_to 'Read more', post %></small></div>
+      <% else %>
+        <%= simple_format post.content %>
+      <% end %>
+    <% end %>
+  </div>
+</div >

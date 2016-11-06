@@ -1,0 +1,9 @@
+<div id="posts">
+  <% if @posts.size.zero? %>
+    <div class="no_posts">
+      No posts have been published.
+    </div>
+  <% else %>
+    <%= render @posts %>
+  <% end %>
+</div>
