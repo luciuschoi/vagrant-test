@@ -7,6 +7,9 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag 'rorlab_logo.png' %>
+    <% if user_signed_in? %> 
+      <%= tag :meta, name: 'current-user', data: { id: current_user.id } %> 
+    <% end %>
   </head>
 
   <body>
