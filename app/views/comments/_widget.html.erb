@@ -2,7 +2,7 @@
   <h2 class="comments-header">
     Comments <small id="comments-count-of-commentable-<%= commentable.id %>"><%= commentable.comments.size %></small>
   </h2>
-  <ul class="comments-list" data-channel='comments'>
+  <ul class="comments-list" data-channel='comments' data-commentable-id="<%= commentable.id %>">>
     <%= render commentable.comments.where(parent: nil) %>
   </ul>
   <!-- comment-form -->
