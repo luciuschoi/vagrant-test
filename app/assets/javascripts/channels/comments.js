@@ -1,6 +1,6 @@
 App.comments = App.cable.subscriptions.create('CommentsChannel', {
   collection: function (parent_id) {
-    if (!!parent_id) {
+    if (parent_id) {
       // console.log("parent_id defined...." + parent_id)
       $comment_parent = $("[data-channel='comment-" + parent_id + "'] > ul");
       if(!$comment_parent.length){
@@ -37,8 +37,8 @@ App.comments = App.cable.subscriptions.create('CommentsChannel', {
 
   followCurrentPost: function () {
     var commentableId;
-    commentableId = this.collection();
-    if (commentableId = this.collection().data('commentable-id')) {
+    commentableId = this.collection().data('commentable-id');
+    if (commentableId) {
       return this.perform('follow', {
         commentable_id: commentableId
       });
