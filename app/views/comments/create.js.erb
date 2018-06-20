@@ -24,7 +24,7 @@ $comments_count = $("#comments-count-of-commentable-<%= @commentable.id %>");
     $reply_link = $comment.find('a.reply-comment-link')[0]
     $reply_link.href = $restore_link.href + "/reply"
     // suggested by Aleksandr Balakiriev
-    <% if @comment.parent.replies.size.zero? %>
+    <% if @comment.parent.replies.size == 1 %>
       $edit_link = $comment.find('a.edit-comment-link')[0]
       $delete_link = $comment.find('a.delete-comment-link')[0]
       $edit_link.parentNode.remove();    
