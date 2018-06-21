@@ -24,3 +24,5 @@
 
 .vagrant
 readme.html
+
+config/master.key
