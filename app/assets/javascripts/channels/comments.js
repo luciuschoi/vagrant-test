@@ -24,7 +24,17 @@ App.comments = App.cable.subscriptions.create('CommentsChannel', {
 
   received: function (data) {
     if (!this.userIsCurrentUser(data.comment)) {
-      // console.log(data);
+      comment_user_id = data.comment.match(/data-user-id="(.*)"/)[1];
+      current_user_id = document.querySelector("meta[name='current-user']").getAttribute("data-id");
+      console.info("*comment user id : " + comment_user_id);
+      console.info("*current user id : " + current_user_id);
+      if (comment_user_id != current_user_id){
+        data.comment = data.comment.replace(/<span class='dot-bullet'><a class="(edit|delete)-comment-link"\s.*?>.*?<\/a><\/span>/g, '');
+        console.info(data.comment);
+      } else {
+        console.info(data.comment);
+      }
+      // console.log(data.comment); 
       return this.collection(data.parent_id).append(data.comment);
     }
   },

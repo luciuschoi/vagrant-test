@@ -7,20 +7,16 @@
       <%= comment.user.name %>
       <span class='dot-bullet'><%= localize(comment.created_at, format: :long) %></span>
       <% if comment.replies.size.zero? %>
-        <% if can? :update, comment %>
-          <span class='dot-bullet'><%= link_to "Edit", edit_polymorphic_path([comment.commentable, comment]), class: 'edit-comment-link', remote: true  %></span>
-        <% end %>
-        <% if can? :destroy, comment %>
-          <span class='dot-bullet'><%= link_to "Destroy", [comment.commentable, comment], method: :delete, class: 'delete-comment-link', data:{confirm:"Are your sure?"}, remote: true %></span>
-        <% end %>
+        <span class='dot-bullet'><%= link_to "Edit", edit_polymorphic_path([comment.commentable, comment]), class: 'edit-comment-link', remote: true  %></span>
+        <span class='dot-bullet'><%= link_to "Destroy", [comment.commentable, comment], method: :delete, class: 'delete-comment-link', data:{confirm:"Are your sure?"}, remote: true %></span>
       <% else %>  
         <!-- Note: very tricky !!!-->
         <%= link_to "For reply link", [comment.commentable, comment], method: :delete, class: 'delete-comment-link d-none' %>     
       <% end %>
       <span class='dot-bullet'><%= link_to "Reply", polymorphic_path([:reply, comment.commentable, comment]), class: 'reply-comment-link', remote: true  %></span>
-      <% if !broadcasted %>
-        <span class='dot-bullet text-success'><%= "page-loaded...." %></span>
-      <% end %>
+      <% if broadcasted %>
+        <span class='dot-bullet text-success'><%= "broadcasted...." %></span>
+      <% end %>      
     </small>
   </div>
   <% if comment.replies.any? %>

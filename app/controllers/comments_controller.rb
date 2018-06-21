@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_commentable
   before_action :set_comment, only: [ :reply, :edit, :update, :destroy ]
+  load_and_authorize_resource :comment, param_method: :comment_params
 
   def reply
     @reply = @commentable.comments.build(parent: @comment)
@@ -12,6 +13,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
+        BroadcastCommentJob.perform_now @comment
         format.html { redirect_to @commentable, notice: "Comment was successfully created."}
         format.json { render json: @comment }
         format.js
