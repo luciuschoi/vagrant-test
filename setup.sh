@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "Provision virtual machine..."
 
 echo "Updating Packages"
@@ -32,6 +33,7 @@ echo "Installing MySQL"
 
 echo "Installing Redis"
   sudo apt-get install redis -y > /dev/null 2>&1
+  sudo apt-get install redis-server -y > /dev/null 2>&1
 
 echo "Installing Pygments"
   sudo apt-get install python-pygments > /dev/null 2>&1
