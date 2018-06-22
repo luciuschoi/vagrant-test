@@ -12,7 +12,7 @@ class BroadcastCommentJob < ApplicationJob
 
   def render_comment(comment)
     @job_renderer.render partial: "comments/comment_broadcasted",
-                         locals: { comment: comment, broadcasted: 'true' }
+                         locals: { comment: comment }
   end
 
   def wardenize

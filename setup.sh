@@ -54,10 +54,10 @@ echo "Installing ruby-build"
     git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build > /dev/null 2>&1
   fi
 
-echo "Installing ruby 2.3.1"
-  sudo -H -u vagrant bash -i -c 'rbenv install 2.3.1' > /dev/null 2>&1
+echo "Installing ruby 2.5.1"
+  sudo -H -u vagrant bash -i -c 'rbenv install 2.5.1' > /dev/null 2>&1
   sudo -H -u vagrant bash -i -c 'rbenv rehash' > /dev/null 2>&1
-  sudo -H -u vagrant bash -i -c 'rbenv global 2.3.1' > /dev/null 2>&1
+  sudo -H -u vagrant bash -i -c 'rbenv global 2.5.1' > /dev/null 2>&1
   sudo -H -u vagrant bash -i -c 'gem install bundler --no-ri --no-rdoc' > /dev/null 2>&1
   sudo -H -u vagrant bash -i -c 'rbenv rehash' > /dev/null 2>&1
 

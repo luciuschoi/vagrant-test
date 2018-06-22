@@ -10,7 +10,9 @@
   $comment_parent = $("#comments-widget-of-commentable-<%= @commentable.id %> .comments-list");
   $comment_form = $("#comments-widget-of-commentable-<%= @commentable.id %> .comment-form form");
 <% end %>
+
 $comments_count = $("#comments-count-of-commentable-<%= @commentable.id %>");
+
 <% if @comment.errors.empty?  # if no erros on creating a comment... %>
   $comments_count.html("<%= @commentable.comments.size %>").effect('highlight',{}, 1000);
   // $comment_parent.append("<%#=j render @comment %>").find('li').last().effect("highlight", {}, 1000);

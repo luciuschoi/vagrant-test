@@ -18,9 +18,7 @@
         <%= link_to "For reply link", [comment.commentable, comment], method: :delete, class: 'delete-comment-link d-none' %>     
       <% end %>
       <span class='dot-bullet'><%= link_to "Reply", polymorphic_path([:reply, comment.commentable, comment]), class: 'reply-comment-link', remote: true  %></span>
-      <% if !broadcasted %>
-        <span class='dot-bullet text-success'><%= "page-loaded...." %></span>
-      <% end %>
+      <span class='dot-bullet text-primary'><%= "page-loaded...." %></span>
     </small>
   </div>
   <% if comment.replies.any? %>
