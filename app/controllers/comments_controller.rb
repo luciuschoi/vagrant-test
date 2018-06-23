@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
-        BroadcastCommentJob.perform_now @comment
+        BroadcastCommentJob.perform_now @comment, 'create'
         format.html { redirect_to @commentable, notice: "Comment was successfully created."}
         format.json { render json: @comment }
         format.js
@@ -31,6 +31,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
+        BroadcastCommentJob.perform_now @comment, 'update'
         format.html { redirect_to @commentable, notice: "Comment was successfully updated."}
         format.json { render json: @comment }
         format.js
@@ -43,7 +44,10 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    old_comment = @comment.dup
+    old_comment.id = @comment.id
     @comment.destroy if @comment.errors.empty?
+    BroadcastCommentJob.perform_now old_comment, 'destroy'
     respond_to do |format|
       format.html { redirect_to @commentable, notice: "Comments was successfully destroyed."}
       format.json { head :no_content }

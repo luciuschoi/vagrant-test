@@ -1,7 +1,24 @@
 $comments_count = $("#comments-count-of-commentable-<%= @commentable.id %>");
 <% if @comment.errors.empty? %>
-  $comments_count.html("<%= @commentable.comments.size %>").effect('highlight',{}, 1000);
-  $("#comment_<%= @comment.id %>").effect("highlight", { color: '#f7937c' }, 500).slideUp('fast');
+  <% if @comment.parent && can?(:update, @comment.parent) %>
+    // added edit and destroy link
+    $links = $("#comment_<%= @comment.id %> .dot-bullet a");
+    $edit_link = $links[0];
+    $delete_link = $links[1];
+    $edit_link.href = "<%= edit_post_comment_url(@comment.parent.commentable, @comment.parent) %>"
+    $delete_link.href = "<%= post_comment_url(@comment.parent.commentable, @comment.parent) %>"
+    $new_edit_link = document.createElement('span');
+    $new_edit_link.className= 'dot-bullet ml-1';
+    $new_edit_link.appendChild($edit_link);
+    $new_delete_link = document.createElement('span');
+    $new_delete_link.className= 'dot-bullet ml-1';
+    $new_delete_link.appendChild($delete_link);
+    $("#comment_<%= @comment.parent.id %> .comment-info small .dot-bullet")[0].after($new_edit_link, $new_delete_link);
+    console.log($edit_link);
+    console.log($delete_link);
+  <% end %>
+<!--  $comments_count.html("<%#= @commentable.comments.size %>").effect('highlight',{}, 1000);-->
+<!--  $("#comment_<%#= @comment.id %>").effect("highlight", { color: '#f7937c' }, 500).slideUp('fast');-->
 <% else %>
   $("#comments-widget-of-commentable-<%= @commentable.id %> .comments-header").after("<div class='alert alert-warning alert-dismissible fade in' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><%= @comment.errors.full_messages.join('') %></div>").next().delay(1500).slideUp('fast');
 <% end %>

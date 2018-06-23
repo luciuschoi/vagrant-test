@@ -3,7 +3,7 @@
     Comments <small id="comments-count-of-commentable-<%= commentable.id %>"><%= commentable.comments.size %></small>
   </h2>
   <ul class="comments-list" data-channel='comments' data-commentable-id="<%= commentable.id %>">
-    <%= render commentable.comments.includes(:user, :replies, :commentable).where(parent: nil).reverse, broadcasted: false %>
+    <%= render commentable.comments.includes(:user, :replies, :commentable).where(parent: nil), broadcasted: false %>
   </ul>
   <!-- comment-form -->
   <%= render "comments/form", comment: commentable.comments.build  %>

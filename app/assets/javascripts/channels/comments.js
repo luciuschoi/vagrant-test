@@ -31,12 +31,30 @@ App.comments = App.cable.subscriptions.create('CommentsChannel', {
       if (comment_user_id != current_user_id){
         data.comment = data.comment.replace(/<span class='dot-bullet'><a class="(edit|delete)-comment-link"\s.*?>.*?<\/a><\/span>/g, '');
         console.info(data.comment);
+        console.log(data.comment_action);
       } else {
         console.info(data.comment);
+        console.log(data.comment_action);
       }
-      // console.log(data.comment); 
-      return this.collection(data.parent_id).append(data.comment);
+      // console.log(data.comment);
+      if (data.comment_action == 'create') {
+        console.log('created');
+        $comments_count = $("#comments-count-of-commentable-" + data.commentable_id);
+        $comments_count.html(data.commentable_comments_size).effect('highlight',{}, 1000);
+        return this.collection(data.parent_id).append(data.comment);
+      };
+      if (data.comment_action == 'update') {
+        console.log('updated');
+        return $("#comment_" + data.comment_id).html(data.comment).find('li').last().effect("highlight", {}, 1000);
+      };
     }
+    if (data.comment_action == 'destroy') {
+      console.log('deleted');
+      $comments_count = $("#comments-count-of-commentable-" + data.commentable_id);
+      $comments_count.html(data.commentable_comments_size).effect('highlight',{}, 1000);
+      return $("#comment_" + data.comment_id).effect("highlight", { color: '#f7937c' }, 500).slideUp('fast');
+    }
+
   },
 
   userIsCurrentUser: function (comment) {

@@ -2,10 +2,24 @@ class BroadcastCommentJob < ApplicationJob
   before_perform :wardenize
   queue_as :default
 
-  def perform(comment)
-    ActionCable.server.broadcast "#{comment.commentable_id}:comments",
+  def perform(comment, comment_action)
+    logger.info ">>>>>>>> perform action : #{comment_action}"
+    if comment_action == 'destroy'
+      ActionCable.server.broadcast "#{comment.commentable_id}:comments",
+                                   comment_id: comment.id,
+                                   parent_id: comment&.parent&.id,
+                                   commentable_id: comment.commentable.id,
+                                   commentable_comments_size: comment.commentable.comments.size,
+                                   comment_action: comment_action
+    else
+      ActionCable.server.broadcast "#{comment.commentable_id}:comments",
                                  comment: render_comment(comment),
-                                 parent_id: comment&.parent&.id
+                                 comment_id: comment.id,
+                                 parent_id: comment&.parent&.id,
+                                 commentable_id: comment.commentable.id,
+                                 commentable_comments_size: comment.commentable.comments.size,
+                                 comment_action: comment_action
+    end
   end
 
   private
