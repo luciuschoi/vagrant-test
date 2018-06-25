@@ -17,9 +17,9 @@ $comments_count = $("#comments-count-of-commentable-<%= @commentable.id %>");
   $comments_count.html("<%= @commentable.comments.size %>").effect('highlight',{}, 1000);
   // $comment_parent.append("<%#=j render @comment %>").find('li').last().effect("highlight", {}, 1000);
   $comment_form[0].reset();
-  $comment_form.remove();
   // when a reply was created
   <% if @comment.parent.present? %>
+    $comment_form.remove();
     // console.log("start");
     $comment = $("#comment_<%= @comment.parent.id %>");
     // console.log("end");
