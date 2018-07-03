@@ -23,7 +23,7 @@ App.comments = App.cable.subscriptions.create('CommentsChannel', {
   },
 
   received: function (data) {
-    if (!this.userIsCurrentUser(data.comment)) {
+    if (data.comment_action != 'destroy' && !this.userIsCurrentUser(data.comment)) {
       data.comment = data.comment.replace(/<span class='dot-bullet'><a class="(edit|delete)-comment-link"\s.*?>.*?<\/a><\/span>/g, '');
     } else {
       if (data.comment_action == 'update') {
