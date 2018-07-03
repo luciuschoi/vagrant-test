@@ -17,8 +17,6 @@ $comments_count = $("#comments-count-of-commentable-<%= @commentable.id %>");
     console.log($edit_link);
     console.log($delete_link);
   <% end %>
-<!--  $comments_count.html("<%#= @commentable.comments.size %>").effect('highlight',{}, 1000);-->
-<!--  $("#comment_<%#= @comment.id %>").effect("highlight", { color: '#f7937c' }, 500).slideUp('fast');-->
 <% else %>
   $("#comments-widget-of-commentable-<%= @commentable.id %> .comments-header").after("<div class='alert alert-warning alert-dismissible fade in' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><%= @comment.errors.full_messages.join('') %></div>").next().delay(1500).slideUp('fast');
 <% end %>

@@ -8,7 +8,9 @@ class BroadcastCommentJob < ApplicationJob
       ActionCable.server.broadcast "#{comment.commentable_id}:comments",
                                    comment_id: comment.id,
                                    parent_id: comment&.parent&.id,
-                                   commentable_id: comment.commentable.id,
+                                   commentable_id: comment.commentable_id,
+                                   commentable_type:
+                                   comment.commentable_type.underscore.pluralize,
                                    commentable_comments_size: comment.commentable.comments.size,
                                    comment_action: comment_action
     else
