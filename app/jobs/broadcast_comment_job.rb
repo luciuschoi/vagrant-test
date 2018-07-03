@@ -14,6 +14,7 @@ class BroadcastCommentJob < ApplicationJob
     else
       ActionCable.server.broadcast "#{comment.commentable_id}:comments",
                                  comment: render_comment(comment),
+                                 user_id: comment.user.id,
                                  comment_id: comment.id,
                                  parent_id: comment&.parent&.id,
                                  commentable_id: comment.commentable.id,
