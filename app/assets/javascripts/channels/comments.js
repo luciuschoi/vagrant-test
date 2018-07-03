@@ -27,11 +27,11 @@ App.comments = App.cable.subscriptions.create('CommentsChannel', {
       data.comment = data.comment.replace(/<span class='dot-bullet'><a class="(edit|delete)-comment-link"\s.*?>.*?<\/a><\/span>/g, '');
     } else {
       if (data.comment_action == 'update') {
-        console.log('updated');
+        console.log('updated successfully');
         return $("#comment_" + data.comment_id).html(data.comment).find('li').last().effect("highlight", {}, 1000);
       }
       if (data.comment_action == 'destroy') {
-        console.log('deleted');
+        console.log('deleted successfully');
         $comments_count = $("#comments-count-of-commentable-" + data.commentable_id);
         $comments_count.html(data.commentable_comments_size).effect('highlight', {}, 1000);
         return $("#comment_" + data.comment_id).effect("highlight", {
@@ -40,7 +40,7 @@ App.comments = App.cable.subscriptions.create('CommentsChannel', {
       }
     }
     if (data.comment_action == 'create') {
-      console.log('created');
+      console.log('created successfully');
       $comments_count = $("#comments-count-of-commentable-" + data.commentable_id);
       $comments_count.html(data.commentable_comments_size).effect('highlight', {}, 1000);
       this.collection(data.parent_id).append(data.comment);
